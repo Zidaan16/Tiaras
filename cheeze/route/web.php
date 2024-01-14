@@ -15,12 +15,12 @@ use App\Controller\HomeController;
 # Set homepage
 Route::Homepage(function ()
 {
-    $file = fopen('.env', 'r');
+    $file = fopen('cheeze/.env', 'r');
     return view('welcome', ['env_file' => $file]);
 });
 
 # Route GET method with Middleware
-Route::get('/home', [HomeController::class, 'index'])->middleware('Auth');
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::post('/home/post', [HomeController::class, 'show']);
 

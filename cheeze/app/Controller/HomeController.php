@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 use App\Request\Post;
+use App\Model\Home;
 
 class HomeController extends Controllers{
 

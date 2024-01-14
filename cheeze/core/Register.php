@@ -16,6 +16,7 @@ class Register extends Routes{
 
     public static function get(String $url, $data = []){
         $url = ltrim($url, '/');
+        $url = rtrim($url, '/');
         $arr =[
             'method' => 'GET',
             'url' => $url,

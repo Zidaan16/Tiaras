@@ -18,11 +18,25 @@ class Init extends App{
 
     private static $result = [];
 
+    public function __construct()
+    {
+        $this->LoadEnv();
+        $this->LoadDB();
+        $this->LoadCore();
+        $this->LoadModel();
+        $this->LoadController();
+        $this->LoadRequest();
+        $this->LoadRoute();
+        $this->RouteExec();
+        $this->HttpResponse(http_response_code());
+    }
+    
     public function RouteExec()
     {
         $arr = Routes::$list;
+        $url = rtrim($_GET['url'], '/');
         for ($i=0; $i < count($arr); $i++) { 
-            if ($_GET['url'] == $arr[$i]['url']){
+            if ($url == $arr[$i]['url']){
                 if ($_SERVER['REQUEST_METHOD'] == $arr[$i]['method']) {
                     if (!empty($arr[$i]['data'])){
                         self::$result = [
@@ -30,11 +44,8 @@ class Init extends App{
                             'url' => $arr[$i]['url'],
                             'data' => $arr[$i]['data']
                         ];
-                        // print_r(self::$result);
-                        // call_user_func($arr[$i]['data']);
                         break;
                     }
-                    // exit;
                 }else{
                     echo 'Method Not Allowed';
                     exit;
@@ -43,12 +54,11 @@ class Init extends App{
         }
         if (!empty(self::$result)){
             if (self::$result['method'] == 'POST'){
-                // require_once 
                 $class = new Reflectionclass(self::$result['data'][0]);
                 $name = $class->getMethod(self::$result['data'][1]);
                 $bool = (empty($name->getParameters()[0]))? False : True;
                 if ($bool){
-                    $name = $name->getParameters()[0]->getClass()->getName();
+                    $name = $name->getParameters()[0]->getType()->getName();
                     call_user_func_array(self::$result['data'], [new $name]);
                     exit;
                 }
@@ -59,19 +69,14 @@ class Init extends App{
                 exit;
             }
         }else{
-            echo '404';
+            http_response_code(404);
         }
+    }
+
+    private function HttpResponse($function)
+    {
+        if ($function == 404) echo 404;
     }
 }
 
-$init = new Init();
-
-$init->LoadEnv();
-$init->LoadDB();
-$init->LoadCore();
-$init->LoadModel();
-$init->LoadController();
-$init->LoadRequest();
-$init->LoadRoute();
-
-$init->RouteExec();
+new Init();

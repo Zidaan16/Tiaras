@@ -25,7 +25,7 @@ class Builder extends Config{
 
     public static function select(String $key)
     {
-        self::$data = "select * from ".self::$table;
+        self::$data = "select $key from ".self::$table;
         return new self;
     }
 

@@ -13,7 +13,7 @@ class App {
     
     public function LoadEnv(): void
     {
-        $file = fopen('.env', 'r');
+        $file = fopen('cheeze/.env', 'r');
         while (!feof($file)) {
             $line = fgets($file);
             $line = explode('=', $line);
@@ -26,7 +26,7 @@ class App {
         spl_autoload_register(function($class){
             $class = explode('\\', $class);
             if (!empty($class[1])){
-                $path = 'database/'.$class[1].'.php';
+                $path = 'cheeze/database/'.$class[1].'.php';
                 if (file_exists($path)){
                     require_once 'database/'.$class[1].'.php';
                 }
@@ -37,9 +37,9 @@ class App {
     public function LoadCore()
     {
         $core = [
-            'core/function/func.php',
-            'core/Routes.php',
-            'core/Register.php'
+            'cheeze/core/function/func.php',
+            'cheeze/core/Routes.php',
+            'cheeze/core/Register.php'
             
         ];
         for ($i=0; $i < count($core); $i++) { 
@@ -49,7 +49,7 @@ class App {
 
     public function LoadRoute()
     {
-        require_once 'route/web.php';
+        require_once 'cheeze/route/web.php';
     }
 
     public function LoadModel()
@@ -57,9 +57,9 @@ class App {
         spl_autoload_register(function($class){
             $class = explode('\\', $class);
             if (!empty($class[2])){
-                $path = 'app/Model/'.$class[2].'.php';
+                $path = 'cheeze/app/Model/'.$class[2].'.php';
                 if (file_exists($path)){
-                    require_once 'app/Model/'.$class[2].'.php';
+                    require_once 'cheeze/app/Model/'.$class[2].'.php';
                 }
             }
         });
@@ -70,9 +70,9 @@ class App {
         spl_autoload_register(function($class){
             $class = explode('\\', $class);
             if (!empty($class[2])){
-                $path = 'app/Controller/'.$class[2].'.php';
+                $path = 'cheeze/app/Controller/'.$class[2].'.php';
                 if (file_exists($path)){
-                    require_once 'app/Controller/'.$class[2].'.php';
+                    require_once 'cheeze/app/Controller/'.$class[2].'.php';
                 }
             }
         });
@@ -83,9 +83,9 @@ class App {
         spl_autoload_register(function($class){
             $class = explode('\\', $class);
             if (!empty($class[2])){
-                $path = 'app/Request/'.$class[2].'.php';
+                $path = 'cheeze/app/Request/'.$class[2].'.php';
                 if (file_exists($path)){
-                    require_once 'app/Request/'.$class[2].'.php';
+                    require_once 'cheeze/app/Request/'.$class[2].'.php';
                 }
             }
         });

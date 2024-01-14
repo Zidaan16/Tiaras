@@ -19,7 +19,7 @@ class Routes {
     {
         $i = array_search(self::$tempList, self::$list);
         if ($_GET['url'] == self::$list[$i]['url']){
-            require_once 'app/Middleware/'.$class.'.php';
+            require_once 'cheeze/app/Middleware/'.$class.'.php';
             $class = "App\\Middleware\\$class";
             call_user_func(array(new $class, 'run'));
         }
