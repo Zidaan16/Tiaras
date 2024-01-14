@@ -14,11 +14,6 @@ function view(String $filename, array $data = []) {
     include 'cheeze/route/view/'.$filename.'.php';
 }
 
-function JsonResponse($data = [], $httpcode = []) {
-    header('Content-Type: application/json;');
-    echo json_encode($data);
-}
-
 function response($code = []) {
     class response
     {
@@ -29,10 +24,9 @@ function response($code = []) {
         }
 
         public function json(array $arr, $httpres = []){
-            if ($httpres == 200) http_response_code(200);
-            if ($httpres == 404) http_response_code(404);
+            if (!empty($httpres)) http_response_code($httpres);
             header("Content-type: application/json");
-            return json_encode($arr, true);
+            echo json_encode($arr, true);
         }
 
         
