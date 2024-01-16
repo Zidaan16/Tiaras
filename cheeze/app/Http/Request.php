@@ -1,5 +1,5 @@
 <?php
-namespace App\Request;
+namespace App\Http;
 use App\Controller\Controllers;
 
 /**
@@ -11,7 +11,7 @@ use App\Controller\Controllers;
  * 
  */
 
-class Post extends Controllers{
+class Request extends Controllers{
 
     public $data = array();
     

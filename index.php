@@ -1,5 +1,5 @@
 <?php
-require_once 'core/init.php';
+require_once 'cheeze/core/init.php';
 
 /**
  * Copyright 2024 Ahmad Zidan

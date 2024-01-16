@@ -14,36 +14,41 @@ use core\Routes;
 
 class Register extends Routes{
 
-    public static function get(String $url, $data = []){
+    public static function Homepage($data = [])
+    {
+        if (!isset($_GET['url'])){
+            call_user_func($data);
+            exit;
+        }
+    }
+
+    public static function get(String $url, $data = [])
+    {
         $url = ltrim($url, '/');
         $url = rtrim($url, '/');
         $arr =[
             'method' => 'GET',
             'url' => $url,
-            'data' => $data
+            'data' => $data,
+            'midware' => null,
+            'auth' => null
         ];
-        self::$tempList = $arr;
         array_push(self::$list, $arr);
         return new self;
     }
 
-    public static function post(String $url, $data = []){
+    public static function post(String $url, $data = [])
+    {
         $url = ltrim($url, '/');
         $arr =[
             'method' => 'POST',
             'url' => $url,
-            'data' => $data
+            'data' => $data,
+            'midware' => null,
+            'auth' => null
         ];
-        self::$tempList = $arr;
         array_push(self::$list, $arr);
         return new self;
-    }
-    
-    public static function Homepage($data = []){
-        if (!isset($_GET['url'])){
-            call_user_func($data);
-            exit;
-        }
     }
     
 }

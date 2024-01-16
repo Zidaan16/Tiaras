@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-use App\Request\Post;
+use App\Http\Request;
 use App\Model\Home;
 
 class HomeController extends Controllers{
@@ -12,7 +12,7 @@ class HomeController extends Controllers{
     }
 
     /**
-     * Show method with POST request
+     * Show method with request
      * 
      * Type validate cheat sheet:
      *  Type|Min/Max length|Nullable or not (default not)
@@ -29,8 +29,9 @@ class HomeController extends Controllers{
      * http://instagram.com/zidaaaaanz
      * 
      */
-    public static function show(Post $value)
+    public static function show(Request $value)
     {
+        // Return bool
         $result = $value->validate([
             $value->username => 'string|min:4',
             $value->password => 'string'

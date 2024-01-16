@@ -13,16 +13,21 @@ namespace core;
 class Routes {
 
     public static $list = [];
-    public static $tempList = [];
 
-    public static function middleware($class = [])
+    public static function add(String $name, String $value): void
     {
-        $i = array_search(self::$tempList, self::$list);
-        if ($_GET['url'] == self::$list[$i]['url']){
-            require_once 'cheeze/app/Middleware/'.$class.'.php';
-            $class = "App\\Middleware\\$class";
-            call_user_func(array(new $class, 'run'));
-        }
+        self::$list[array_key_last(self::$list)][$name] = $value;
     }
+
+    public static function auth(String $name): void
+    {
+        self::add('auth', $name);
+    }
+
+    public static function middleware(String $name): void
+    {
+        self::add('midware', $name);
+    }
+    
 
 }

@@ -9,21 +9,24 @@
  * 
  */
 
-function view(String $filename, array $data = []) {
+function view(String $filename, array $data = [])
+{
     if (!empty($data)) extract($data);
     include 'cheeze/route/view/'.$filename.'.php';
 }
 
-function response($code = []) {
-    class response
-    {
+function response($code = [])
+{
+    class Response {
         private $code;
         
-        public function __construct($data = []){
+        public function __construct($data = [])
+        {
             if (!empty($data)) $this->code;
         }
 
-        public function json(array $arr, $httpres = []){
+        public function json(array $arr, $httpres = [])
+        {
             if (!empty($httpres)) http_response_code($httpres);
             header("Content-type: application/json");
             echo json_encode($arr, true);
@@ -31,6 +34,18 @@ function response($code = []) {
 
         
     }
-    if ($code == null) return new response();
+    if ($code == null) return new Response();
     return http_response_code($code);
+}
+
+function redirect($location)
+{
+   return header("Location: $location");
+}
+
+function isClosure($data)
+{
+    $obj = new ReflectionFunction($data);
+    return $obj->isClosure();
+
 }

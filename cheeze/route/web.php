@@ -2,7 +2,6 @@
 use App\Route\Register as Route;
 use App\Controller\HomeController;
 
-
 /**
  * Web route
  * Copyright 2024 Ahmad Zidan
@@ -12,20 +11,17 @@ use App\Controller\HomeController;
  * 
  */
 
-# Set homepage
-Route::Homepage(function ()
-{
-    $file = fopen('cheeze/.env', 'r');
-    return view('welcome', ['env_file' => $file]);
+Route::get('/', function (){
+    return view('welcome');
 });
 
-# Route GET method with Middleware
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('test', [HomeController::class, 'index']);
 
-Route::post('/home/post', [HomeController::class, 'show']);
+// Middleware auth, check the app/Http/Auth.php to edit the user session, return void
+Route::get('dashboard', [HomeController::class, 'index'])->auth('admin');
 
-
-# Test
-Route::get('/test', function (){
+// Or you can use middleware('name') to customize return, app/Middleware/Auth.php
+Route::get('dashboard2', function (){
     return view('test');
-});
+
+})->middleware('Auth');

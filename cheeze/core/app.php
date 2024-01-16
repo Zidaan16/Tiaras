@@ -40,7 +40,6 @@ class App {
             'cheeze/core/function/func.php',
             'cheeze/core/Routes.php',
             'cheeze/core/Register.php'
-            
         ];
         for ($i=0; $i < count($core); $i++) { 
             require_once $core[$i];
@@ -78,17 +77,24 @@ class App {
         });
     }
 
-    public function LoadRequest()
+    public function LoadHttp()
     {
         spl_autoload_register(function($class){
             $class = explode('\\', $class);
             if (!empty($class[2])){
-                $path = 'cheeze/app/Request/'.$class[2].'.php';
+                $path = 'cheeze/app/Http/'.$class[2].'.php';
                 if (file_exists($path)){
-                    require_once 'cheeze/app/Request/'.$class[2].'.php';
+                    require_once 'cheeze/app/Http/'.$class[2].'.php';
                 }
             }
         });
+    }
+
+    public function RunMiddleware(String $name)
+    {
+        require_once 'cheeze/app/Middleware/'.$name.'.php';
+        $class = "App\\Middleware\\$name";
+        call_user_func(array(new $class, 'run'));
     }
 
 }
