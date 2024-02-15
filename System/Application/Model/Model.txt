@@ -1,0 +1,11 @@
+<?php
+namespace App\Model;
+use System\Database\Query;
+
+class REPLACE_ME {
+
+    public $table = "REPLACE_ME";
+
+    use Query;
+
+}

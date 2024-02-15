@@ -1,0 +1,25 @@
+<?php
+namespace App\Database\Migration;
+use System\DB;
+use System\Database\Forge;
+
+class REPLACE_ME {
+
+    public function up()
+    {
+        if (!DB::hasTable('REPLACE_ME')) {
+            DB::create('REPLACE_ME', function (Forge $table) {
+
+                $table->id();
+                // code
+
+            });
+        }
+    }
+
+    public function down()
+    {
+        DB::dropTableIfExists('REPLACE_ME');
+    }
+
+}

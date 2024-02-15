@@ -1,0 +1,13 @@
+<?php
+namespace App\Middleware;
+use App\Http\Request;
+
+class REPLACE_ME {
+
+    public function handle(Request $request, \Closure $continue)
+    {
+
+        return $continue();
+    }
+
+}

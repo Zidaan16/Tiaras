@@ -1,0 +1,13 @@
+{
+    "app": {
+        "name": "Tiara's",
+        "version": 1,
+        "require": {
+            "php": "8.2.10"
+        }
+    },
+    "author": {
+        "name": "Zidan",
+        "github": "http://github.com/Zidaan16"
+    }
+}
