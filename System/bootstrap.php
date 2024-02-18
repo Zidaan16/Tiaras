@@ -29,7 +29,9 @@ $container->bind('System\Database\Connection', function () {
 // load feature
 $container->bind('Load\Feature', function () {
 
+    require_once 'Feature/collect.php';
     require_once 'Feature/view.php';
+    require_once 'Feature/response.php';
 
 });
 

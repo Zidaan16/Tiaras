@@ -101,6 +101,7 @@ class Console {
     private function showRoute()
     {
         if (empty(RouteCollection::get())) die('Nothing to show up');
+
         foreach (RouteCollection::get() as $key) {
             if (!empty($key['http'])) $this->http[] = $key['http'];
             if (!empty($key['uri'])) $this->uri[] = $key['uri'];
@@ -124,16 +125,25 @@ class Console {
             } else {
                 $this->method[] = null;
             }
+            
+            if (!empty($key['name'])) {
+                $this->name[] = $key['name'];
+                $this->countName[] = strlen($key['name']);
+            }else {
+                $this->name[] = null;
+            }
                 
         }
         $padding1 = (!empty($this->countUri)) ? 3 + max($this->countUri) : 3;
         $padding2 = (!empty($this->countMethod)) ? 3 + max($this->countMethod) : 3;
+        $padding3 = (!empty($this->countName)) ? 3 + max($this->countName) : 7;
         
 
         // header
         echo str_pad("NO", 6, ' ', STR_PAD_RIGHT);
         echo str_pad("HTTP", 9, ' ', STR_PAD_RIGHT);
         echo str_pad("URI", $padding1, ' ', STR_PAD_RIGHT);
+        echo str_pad("Name", $padding3, ' ', STR_PAD_RIGHT);
         echo str_pad("METHOD", $padding2, ' ', STR_PAD_RIGHT).PHP_EOL;
         echo PHP_EOL;
         $no = 0;
@@ -151,6 +161,7 @@ class Console {
             echo str_pad($no, 6, ' ', STR_PAD_RIGHT);
             echo str_pad($this->http[$i], 9, ' ', STR_PAD_RIGHT);
             echo str_pad($this->uri[$i], $padding1, ' ', STR_PAD_RIGHT);
+            echo str_pad($this->name[$i], $padding3, ' ', STR_PAD_RIGHT);
             echo str_pad($controllerMethod, $padding2, ' ', STR_PAD_RIGHT).PHP_EOL;
         }
     }

@@ -8,9 +8,10 @@ trait Dispatcher {
 
     public function dispatcher(Request $request, Array $route)
     {
-        if (!empty($request->server('REQUEST_URI'))) {
-            
-            $url = trim($request->server('REQUEST_URI'), '/');
+        $request_uri = $request->path();
+
+        if (!empty($request_uri)) {
+            $url = trim($request_uri, '/');
             $uri = false;
             $method = false;
 

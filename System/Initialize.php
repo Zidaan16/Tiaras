@@ -1,7 +1,7 @@
 <?php
 require_once '../System/App.php';
 require_once '../System/Container/Container.php';
-require_once '../System/Application/Slice.php';
+require_once '../System/Application/Collection.php';
 require_once '../System/Database/Connection.php';
 require_once '../System/bootstrap.php';
 require_once '../System/Database/Trait/ForgeAttr.php';
@@ -11,6 +11,7 @@ require_once '../System/Database/Select.php';
 require_once '../System/Database/Trait/Query.php';
 require_once '../System/Database/Table.php';
 require_once '../System/Console/Signal.php';
+require_once '../System/Database/Paper/Paper.php';
 require_once '../System/Database/DB.php';
 require_once '../App/Middleware/Middleware.php';
 require_once '../System/Application/Middleware.php';
@@ -24,3 +25,6 @@ require_once '../System/Container/Route/RouteContainer.php';
 require_once '../System/Routing/RouteHandler.php';
 require_once '../System/Routing/Route.php';
 require_once '../Routes/web.php';
+
+\Application\Signal::service(true);
+require_once '../Routes/api.php';

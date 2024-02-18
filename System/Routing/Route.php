@@ -1,25 +1,24 @@
 <?php
 namespace App\Http;
+use System\Feature\Collection;
 use System\Routing\RouteHandler;
 
 class Route {
 
-    public static function get(String $uri, Array|Object|String $method)
+    public static function get($pattern, Array|Object|String $method)
     {
         return new RouteHandler([
             'http' => 'GET',
-            'uri' => $uri,
-            'method' => $method
-        ]);
+            'method' => $method,
+        ], new Collection($pattern));
     }
 
-    public static function post(String $uri, Array|Object|String $method)
+    public static function post($pattern, Array|Object|String $method)
     {
         return new RouteHandler([
             'http' => 'POST',
-            'uri' => $uri,
-            'method' => $method
-        ]);
+            'method' => $method,
+        ], new Collection($pattern));
     }
 
     public static function name(String $name)
